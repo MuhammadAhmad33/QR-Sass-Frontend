@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { TrademarksService } from './trademarks/trademarks.service';
+import { Table } from 'primeng/table';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     name: string = '';
     code: string = '';
     id: string = '';
+    @ViewChild('filter') filter!: ElementRef;
 
     constructor(private productService: ProductService, public layoutService: LayoutService, private trademarksService: TrademarksService) {
         this.subscription = this.layoutService.configUpdate$
@@ -155,6 +157,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.trademarksService.deleteTrademark(id).subscribe((data: any) => {
             this.getTrademarks();
         });
+    }
+
+    onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
     }
 
     ngOnDestroy() {
