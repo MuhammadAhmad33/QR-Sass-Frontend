@@ -23,6 +23,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     trademarks: any;
 
+    visible: boolean = false;
+
+    name: string = '';
+    code: string = '';
+
     constructor(private productService: ProductService, public layoutService: LayoutService, private trademarksService: TrademarksService) {
         this.subscription = this.layoutService.configUpdate$
         .pipe(debounceTime(25))
@@ -107,6 +112,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 }
             }
         };
+    }
+
+    showCreateBrandDialog() {
+        this.visible = true;
+    }
+
+    createBrand() {
+        if(this.name && this.code) {
+            this.trademarksService.createTrademark({name: this.name, code: this.code}).subscribe((data: any) => {
+                this.getTrademarks();
+                this.visible = false;
+                this.name = '';
+                this.code = '';
+            });
+        }
     }
 
     ngOnDestroy() {
