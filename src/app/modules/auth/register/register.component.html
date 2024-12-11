@@ -7,19 +7,22 @@
                     <label for="companyName" class="block text-900 text-xl font-medium mb-2">Nombre compañia</label>
                     <input id="companyName" formControlName="companyName" type="text" placeholder="companyName" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
 
+                    <label for="companyWebsite" class="block text-900 text-xl font-medium mb-2">Web compañia</label>
+                    <input id="companyWebsite" type="text" formControlName="companyWebsite" placeholder="companyWebsite" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+
+                    <label for="name" class="block text-900 text-xl font-medium mb-2">Nombre</label>
+                    <input id="name" type="text" formControlName="name" placeholder="nom" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+
                     <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
                     <input id="email" type="text" formControlName="email" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
 
                     <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
                     <p-password id="password" formControlName="password" placeholder="Password" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
 
-                    <label for="companyWebsite" class="block text-900 text-xl font-medium mb-2">Web compañia</label>
-                    <input id="companyWebsite" type="text" formControlName="companyWebsite" placeholder="companyWebsite" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
-
                     <div class="flex align-items-center justify-content-between gap-5">
 
                     </div>
-                    <button pButton pRipple label="Registrar" class="w-full p-3 text-xl" (click)="register()" [routerLink]="['/dashboard']"></button>
+                    <button pButton pRipple label="Registrar" class="w-full p-3 text-xl"></button>
                 </form>
             </div>
         </div>
