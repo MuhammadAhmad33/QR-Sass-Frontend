@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   UrlApi: 'https://qr-sass-backend.vercel.app/',
+  version: '0.0.1'
 };
 
 /*
