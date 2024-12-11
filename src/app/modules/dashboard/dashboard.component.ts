@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     name: string = '';
     code: string = '';
+    id: string = '';
 
     constructor(private productService: ProductService, public layoutService: LayoutService, private trademarksService: TrademarksService) {
         this.subscription = this.layoutService.configUpdate$
@@ -119,14 +120,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     createBrand() {
-        if(this.name && this.code) {
-            this.trademarksService.createTrademark({name: this.name, code: this.code}).subscribe((data: any) => {
-                this.getTrademarks();
-                this.visible = false;
-                this.name = '';
-                this.code = '';
-            });
+        if(!this.id) {
+            if(this.name && this.code) {
+                this.trademarksService.createTrademark({name: this.name, code: this.code}).subscribe((data: any) => {
+                    this.getTrademarks();
+                    this.visible = false;
+                    this.name = '';
+                    this.code = '';
+                });
+            }
+        } else{
+            if(this.name && this.code) {
+                this.trademarksService.updateTrademark(this.id, {name: this.name, code: this.code}).subscribe((data: any) => {
+                    this.getTrademarks();
+                    this.visible = false;
+                    this.id = '';
+                    this.name = '';
+                    this.code = '';
+                });
+            }
         }
+    }
+
+    editBrand(id: string) {
+        this.trademarksService.getTrademark(id).subscribe((data: any) => {
+            this.name = data.name;
+            this.code = data.code;
+            this.id = id;
+            this.visible = true;
+        });
     }
 
     deleteBrand(id: number) {

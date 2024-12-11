@@ -89,6 +89,7 @@
                         <td style="width: 35%; min-width: 8rem;">{{trademarks.code}}</td>
                         <td style="width: 15%;">
                             <button pButton pRipple type="button" icon="pi pi-search" class="p-button p-component p-button-text p-button-icon-only"></button>
+                            <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editBrand(trademarks._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
                             <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteBrand(trademarks._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
                         </td>
                     </tr>

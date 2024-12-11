@@ -17,16 +17,16 @@ export class TrademarksService {
     return this.http.get(`${this.url}`);
   }
 
-  getTrademark(id: number) {
-    return this.http.get(`${this.url}:${id}`);
+  getTrademark(id: string) {
+    return this.http.get(`${this.url}/${id}`);
   }
 
   createTrademark(values: any) {
     return this.http.post(`${this.url}/create`, values);
   }
 
-  updateTrademark(id: number, values: any) {
-    return this.http.put(`${this.url}:${id}`, values);
+  updateTrademark(id: string, values: any) {
+    return this.http.put(`${this.url}/${id}`, values);
   }
 
   deleteTrademark(id: number) {
