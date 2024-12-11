@@ -129,6 +129,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
     }
 
+    deleteBrand(id: number) {
+        this.trademarksService.deleteTrademark(id).subscribe((data: any) => {
+            this.getTrademarks();
+        });
+    }
+
     ngOnDestroy() {
         if (this.subscription) {
             this.subscription.unsubscribe();
