@@ -32,3 +32,5 @@ https://documenter.getpostman.com/view/28068722/2sAYBViBr7
 
 davidqr@qr.io
 Magic123
+
+https://qr-sass-frontend.vercel.app
