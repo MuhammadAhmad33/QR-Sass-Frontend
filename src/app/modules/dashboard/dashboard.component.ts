@@ -168,6 +168,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.filter.nativeElement.value = '';
     }
 
+    getColspan() {
+        return (this.trademarks.length > 0) ? 4 : 4;
+    }
+
     ngOnDestroy() {
         if (this.subscription) {
             this.subscription.unsubscribe();
