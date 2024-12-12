@@ -14,6 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
                 children: [
                     { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard] },
                     { path: 'qr', loadChildren: () => import('./modules/qr/qr.module').then(m => m.QrModule), canActivate: [AuthGuard] },
+                    { path: 'users', loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule), canActivate: [AuthGuard] },
                 ]
             },
             { path: 'notfound', component: NotfoundComponent },
