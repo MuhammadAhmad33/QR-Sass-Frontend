@@ -47,4 +47,15 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  comapanies(): Observable<any> {
+    return this.http.get<any>(`${environment.UrlApi}companies/6759c4717d20b5feef750f33/users`).pipe(
+        map(res => {
+            return res;
+        }),
+        catchError(error => {
+            return throwError(() => error);
+        })
+    );
+  }
 }
