@@ -6,20 +6,16 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UsersService {
 
-  public url = `${environment.UrlApi}auth`;
+  public url = `${environment.UrlApi}users`;
 
   constructor(
     public http: HttpClient
   ) { }
 
-  register(values: any) {
-    return this.http.post(`${this.url}/register`, values);
-  }
-
-  registerCompany(values:any): Observable<any> {
-    return this.http.post<any>(`${environment.UrlApi}companies/create`, values).pipe(
+  getUsers(): Observable<any> {
+    return this.http.get<any>(`${environment.UrlApi}users`).pipe(
         map(res => {
             return res;
         }),
@@ -29,8 +25,8 @@ export class AuthService {
     );
   }
 
-  addUserToCompany(values:any): Observable<any> {
-    return this.http.post<any>(`${environment.UrlApi}users/create`, values).pipe(
+  createUser(data: any): Observable<any> {
+    return this.http.post<any>(this.url, data).pipe(
         map(res => {
             return res;
         }),
@@ -38,13 +34,5 @@ export class AuthService {
             return throwError(() => error);
         })
     );
-  }
-
-  login(values: any) {
-    return this.http.post(`${this.url}/login`, values);
-  }
-
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
   }
 }

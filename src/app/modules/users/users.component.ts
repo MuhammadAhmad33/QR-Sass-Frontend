@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AuthService } from '../auth/service/auth/auth.service';
 import { Table } from 'primeng/table';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -11,18 +11,28 @@ export class UsersComponent {
 
   users: any;
 
+  visible: boolean = false;
+
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  id: string = '';
+
   @ViewChild('filter') filter!: ElementRef;
 
   constructor(
-    private authService: AuthService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit() {
     this.getUsers();
+    /* this.usersService.createUser({ name: 'Pere Doe', email: 'pere@pere.com', password: '123456' }).subscribe((data: any) => {
+         console.log(data);
+    }); */
   }
 
   getUsers() {
-    this.authService.comapanies().subscribe((data: any) => {
+    this.usersService.getUsers().subscribe((data: any) => {
          this.users = data;
     });
   }
@@ -36,9 +46,37 @@ export class UsersComponent {
       this.filter.nativeElement.value = '';
   }
 
-  
   getColspan() {
     return 4;
+  }
+
+  createUser() {
+    if(!this.id) {
+      if(this.name && this.email && this.password) {
+          this.usersService.createUser({name: this.name, email: this.email, password: this.password}).subscribe((data: any) => {
+              this.clearForm();
+          });
+      }
+    } else{
+      /* if(this.name && this.code) {
+          this.trademarksService.updateTrademark(this.id, {name: this.name, code: this.code}).subscribe((data: any) => {
+              this.clearForm();
+          });
+      } */
+    }
+  }
+
+  clearForm() {
+    this.getUsers();
+    this.visible = false;
+    this.id = '';
+    this.name = '';
+    this.email = '';
+    this.password = '';
+  }
+
+  showCreateUserDialog() {
+    this.visible = true;
   }
 
 }
