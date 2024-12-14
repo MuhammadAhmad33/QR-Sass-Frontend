@@ -12,7 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
-
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [UrlComponent],
@@ -27,6 +27,7 @@ import { TagModule } from 'primeng/tag';
     InputTextModule,
     DialogModule,
     TagModule,
+    QRCodeModule,
     UrlRoutingModule
   ]
 })

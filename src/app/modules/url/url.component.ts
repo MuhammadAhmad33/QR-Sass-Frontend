@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UrlService } from './service/url.service';
 import { Table } from 'primeng/table';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-url',
@@ -16,6 +17,8 @@ export class UrlComponent {
   id: string = '';
 
   visible: boolean = false;
+  visibleDialogUrl: boolean = false;
+  urlQr: string = '';
 
   @ViewChild('filter') filter!: ElementRef;
 
@@ -88,5 +91,22 @@ export class UrlComponent {
     this.urlService.deleteUrl(id).subscribe((data: any) => {
         this.getUrls();
     });
+  }
+
+  showDialogQr(tinyUrl) {
+    this.visibleDialogUrl = true;
+    this.urlQr = tinyUrl;
+  }
+
+  downloadQr() {
+    console.log(this.urlQr);
+    this.downloadURI(this.urlQr, 'qr-code.png');
+  }
+
+  downloadURI(uri, name) {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href
+    link.click();
   }
 }
