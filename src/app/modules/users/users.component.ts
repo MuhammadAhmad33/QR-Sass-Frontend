@@ -92,8 +92,7 @@ export class UsersComponent {
       this.email = data.email;
       this.password = data.password;
       this.visible = true;
-  });
-
+    });
   }
 
 }
