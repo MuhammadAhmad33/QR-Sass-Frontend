@@ -19,6 +19,7 @@
                     <tr>
                         <th pSortableColumn="name">Nom<p-sortIcon field="name"></p-sortIcon></th>
                         <th pSortableColumn="price">Email<p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="active">Estat<p-sortIcon field="active"></p-sortIcon></th>
                         <th>Acciones</th>
                     </tr>
                 </ng-template>
@@ -26,10 +27,12 @@
                     <tr>
                         <td style="width: 35%; min-width: 7rem;">{{user.name}}</td>
                         <td style="width: 35%; min-width: 8rem;">{{user.email}}</td>
+                        <td style="width: 15%; min-width: 8rem;" *ngIf="user.isActive"><p-tag severity="success" value="Actiu"/></td>
+                        <td style="width: 15%;" *ngIf="!user.isActive"><p-tag severity="danger" value="Bloquejat"/></td>
                         <td style="width: 15%;">
                             <button pButton pRipple type="button" icon="pi pi-search" class="p-button p-component p-button-text p-button-icon-only"></button>
-                            <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editBrand(user._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
-                            <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteBrand(user._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
+                            <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editUser(user._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
+                            <button pButton pRipple type="button" icon="pi pi-trash" *ngIf="!user.isOwner" (click)="deleteUser(user._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
                         </td>
                     </tr>
                 </ng-template>

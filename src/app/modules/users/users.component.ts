@@ -53,16 +53,16 @@ export class UsersComponent {
   createUser() {
     if(!this.id) {
       if(this.name && this.email && this.password) {
-          this.usersService.createUser({name: this.name, email: this.email, password: this.password}).subscribe((data: any) => {
+          this.usersService.createUser({name: this.name, email: this.email, password: this.password, isOwner: false}).subscribe((data: any) => {
               this.clearForm();
           });
       }
     } else{
-      /* if(this.name && this.code) {
-          this.trademarksService.updateTrademark(this.id, {name: this.name, code: this.code}).subscribe((data: any) => {
+      if(this.name && this.email) {
+          this.usersService.updateUser(this.id, {name: this.name, email: this.email, password: this.password}).subscribe((data: any) => {
               this.clearForm();
           });
-      } */
+      }
     }
   }
 
@@ -77,6 +77,23 @@ export class UsersComponent {
 
   showCreateUserDialog() {
     this.visible = true;
+  }
+
+  deleteUser(id: string) {
+    this.usersService.deleteUser(id).subscribe((data: any) => {
+        this.getUsers();
+    });
+  }
+
+  editUser(id: any) {
+    this.usersService.getUser(id).subscribe((data: any) => {
+      this.id = data._id;
+      this.name = data.name;
+      this.email = data.email;
+      this.password = data.password;
+      this.visible = true;
+  });
+
   }
 
 }

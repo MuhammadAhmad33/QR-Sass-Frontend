@@ -25,8 +25,41 @@ export class UsersService {
     );
   }
 
+  getUser(id: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/${id}`).pipe(
+        map(res => {
+            return res;
+        }),
+        catchError(error => {
+            return throwError(() => error);
+        })
+    );
+  }
+
   createUser(data: any): Observable<any> {
     return this.http.post<any>(this.url, data).pipe(
+        map(res => {
+            return res;
+        }),
+        catchError(error => {
+            return throwError(() => error);
+        })
+    );
+  }
+
+  updateUser(id: string, data: any): Observable<any> {
+    return this.http.put<any>(`${this.url}/${id}`, data).pipe(
+        map(res => {
+            return res;
+        }),
+        catchError(error => {
+            return throwError(() => error);
+        })
+    );
+  }
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`).pipe(
         map(res => {
             return res;
         }),

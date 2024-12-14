@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { UsersComponent } from './users.component';
+import { TagModule } from 'primeng/tag';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { UsersComponent } from './users.component';
     ButtonModule,
     InputTextModule,
     DialogModule,
+    TagModule,
     UsersRoutingModule
   ]
 })
