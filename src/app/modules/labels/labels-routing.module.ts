@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LabelsComponent } from './labels.component';
-
-// create resolvable routes
-
+import { LabelResolver } from './resolves/label-resolver.service';
 
 const routes: Routes = [
-   { path: ':id', component: LabelsComponent }
+  { path: ':id', component: LabelsComponent, resolve: { label: LabelResolver } }
 ];
 
 @NgModule({
