@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UrlService } from './service/url.service';
 import { Table } from 'primeng/table';
 import { QRCodeComponent } from 'angularx-qrcode';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-url',
@@ -13,12 +14,13 @@ export class UrlComponent {
   urls: any;
 
   fullUrl: string = '';
-  tinyUrl: string = '';
   id: string = '';
 
   visible: boolean = false;
   visibleDialogUrl: boolean = false;
   urlQr: string = '';
+
+  public qrCodeDownloadLink: SafeUrl = "";
 
   @ViewChild('filter') filter!: ElementRef;
 
@@ -56,12 +58,12 @@ export class UrlComponent {
   createUrl() {
     if(!this.id) {
       if(this.fullUrl) {
-        this.urlService.createUrl({fullUrl: this.fullUrl, tinyUrl: this.tinyUrl}).subscribe((data: any) => {
+        this.urlService.createUrl({fullUrl: this.fullUrl}).subscribe((data: any) => {
             this.clearForm();
         });
       }
     } else {
-      this.urlService.updateUrl(this.id, {fullUrl: this.fullUrl, tinyUrl: this.tinyUrl}).subscribe((data: any) => {
+      this.urlService.updateUrl(this.id, {fullUrl: this.fullUrl}).subscribe((data: any) => {
           this.clearForm();
       });
     }
@@ -71,14 +73,12 @@ export class UrlComponent {
     this.getUrls();
     this.visible = false;
     this.fullUrl = '';
-    this.tinyUrl = '';
   }
 
   editUrl(id: any) {
     this.urlService.getUrl(id).subscribe((url: any) => {
         this.visible = true;
         this.fullUrl = url.fullUrl;
-        this.tinyUrl = url.tinyUrl;
         this.id = url._id;
     });
   }
@@ -106,7 +106,10 @@ export class UrlComponent {
   downloadURI(uri, name) {
     var link = document.createElement("a");
     link.download = name;
-    link.href
-    link.click();
+    link.href = uri;
+  }
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
   }
 }

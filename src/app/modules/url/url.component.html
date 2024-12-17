@@ -51,10 +51,6 @@
 
 <p-dialog header="Crear usuari" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
     <!-- <span class="p-text-secondary block mb-5">Crear marca comercial</span> -->
-    <div class="flex align-items-center gap-3 mb-3">
-        <label for="tinyUrl" class="font-semibold w-6rem">tinyUrl</label>
-        <input pInputText id="tinyUrl" class="flex-auto" [(ngModel)]="tinyUrl" autocomplete="off" />
-    </div>
     <div class="flex align-items-center gap-3 mb-5">
         <label for="fullUrl" class="font-semibold w-6rem">fullUrl</label>
         <input pInputText id="fullUrl" class="flex-auto" [(ngModel)]="fullUrl" autocomplete="off" />
@@ -66,8 +62,9 @@
 </p-dialog>
 
 <p-dialog header="QR" [modal]="true" [(visible)]="visibleDialogUrl" [style]="{ width: '25rem' }">
-    <qrcode [qrdata]="urlQr" [width]="308" [errorCorrectionLevel]="'M'"></qrcode>
-    <div class="mt-4">
-        <button pButton label="Descargar" class="p-button-outlined mb-2" icon="pi pi-download" (click)="downloadQr()"></button>
+    <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="urlQr" [width]="308" [errorCorrectionLevel]="'M'"></qrcode>
+    <div class="mt-4 text-center">
+        <!-- <button pButton label="Descargar" class="p-button-outlined mb-2" icon="pi pi-download" (click)="downloadQr()"></button> -->
+        <a [href]="qrCodeDownloadLink" download="qrcode">Descargar</a>
     </div>
 </p-dialog>
