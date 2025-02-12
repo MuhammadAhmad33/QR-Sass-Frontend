@@ -17,6 +17,7 @@ import { AuthGuard } from './auth/auth.guard';
                     { path: 'users', loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule), canActivate: [AuthGuard] },
                     { path: 'urls', loadChildren: () => import('./modules/url/url.module').then(m => m.UrlModule), canActivate: [AuthGuard] },
                     { path: 'label', loadChildren: () => import('./modules/labels/labels.module').then(m => m.LabelsModule) },
+                    { path: 'editor', loadChildren: () => import('./modules/editor/editor.module').then(m => m.EditorModule)}
                 ]
             },
             { path: 'notfound', component: NotfoundComponent },

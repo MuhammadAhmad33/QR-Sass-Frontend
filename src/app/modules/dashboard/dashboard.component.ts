@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TrademarksService } from './trademarks/trademarks.service';
 import { Table } from 'primeng/table';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
 
     @ViewChild('filter') filter!: ElementRef;
 
-    constructor(private trademarksService: TrademarksService) { }
+    constructor(private trademarksService: TrademarksService, public router: Router,) { }
 
     ngOnInit() {
         this.getTrademarks();
@@ -53,6 +54,10 @@ export class DashboardComponent implements OnInit {
         this.id = '';
         this.name = '';
         this.code = '';
+    }
+
+    viewBrand(id: string) {
+        this.router.navigate(['/editor/brand/' + id + '/labels']);
     }
 
     editBrand(id: string) {
