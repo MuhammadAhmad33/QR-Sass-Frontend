@@ -1,0 +1,57 @@
+<!-- <form [formGroup]="labelForm" (ngSubmit)="submitForm()">
+
+  
+    <label>
+      Description:
+      <input formControlName="description" />
+    </label>
+    <br />
+  
+    <div formArrayName="nutritionDeclaration">
+      <div *ngFor="let item of nutritionDeclaration.controls; let i = index" [formGroupName]="i">
+        <label>
+          {{ item.get('name')?.value }}:
+        </label>
+        <input formControlName="value" />
+      </div>
+    </div>
+  
+    <br />
+  
+    <button type="submit">Submit</button>
+  </form> -->
+
+
+  <div class="grid">
+    <div class="col-12 xl:col-8">
+        <div class="card">
+            <form [formGroup]="labelForm" (ngSubmit)="submitForm()">
+                <div class="flex flex-column gap-2">
+                    <label for="username">Nombre</label>
+                    <input type="text" pInputText formControlName="name" />
+                </div>
+
+                <div class="flex flex-column gap-2 mt-4">
+                    <label for="description">Ingredients</label>
+                    <input type="text" pInputText formControlName="description" />
+                </div>
+
+                <h5 class="text-2xl">Información nutricional</h5>
+
+                <div formArrayName="nutritionDeclaration" class="grid-container">
+                    <div *ngFor="let item of nutritionDeclaration.controls; let i = index" [formGroupName]="i">
+                        <div class="flex flex-column gap-2 mt-4">
+                            <label for="value">{{ item.get('name')?.value }}</label>
+                            <p-inputNumber formControlName="value" [minFractionDigits]="1" [maxFractionDigits]="2" inputId="locale-es" 
+                            mode="decimal" 
+                            locale="es-ES" [showButtons]="true" [step]="0.01" />
+                        </div>
+                    </div>
+                  </div>
+                <div class="mt-4">
+                    <p-button type="submit" label="Guardar" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

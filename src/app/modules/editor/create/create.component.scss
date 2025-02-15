@@ -1,0 +1,9 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 16px; /* Espacio entre elementos */
+  }
+  
+  .grid-item {
+    width: 100%;
+  }

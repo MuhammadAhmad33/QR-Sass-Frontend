@@ -36,6 +36,10 @@ export class EditorComponent {
 
   getColspan() {
     return (this.labels.length > 0) ? 4 : 4;
-}
+  }
+
+  createLabel() {
+    this.router.navigate(['editor//brand/' + this.brandId + '/labels/create']);
+  }
 
 }

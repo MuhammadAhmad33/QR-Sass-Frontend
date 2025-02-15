@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path: 'brand/:brandId/labels',
     component: EditorComponent
-  }
+  },
+  { path: 'brand/:brandId/labels/create', loadChildren: () => import('./create/create.module').then(m => m.CreateModule)}
 ];
 
 @NgModule({

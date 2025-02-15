@@ -7,13 +7,17 @@ import { environment } from 'src/environments/environment';
 })
 export class BrandService {
 
-  public url = `${environment.UrlApi}labels/brand`;
+  public url = `${environment.UrlApi}labels/`;
 
   constructor(
     public http: HttpClient
   ) { }
 
   getBrands(brandId: string) {
-    return this.http.get(`${this.url}/${brandId}`);
+    return this.http.get(`${this.url}brand/${brandId}`);
+  }
+
+  createLabel(label: any) {
+    return this.http.post(`${this.url}`, label);
   }
 }
