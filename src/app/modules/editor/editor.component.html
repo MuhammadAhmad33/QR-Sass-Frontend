@@ -28,6 +28,7 @@
                             <button pButton pRipple type="button" icon="pi pi-search" (click)="viewLabel(label._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
                             <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editLabel(label._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
                             <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteLabel(label._id)" class="p-button p-component p-button-text p-button-icon-only"></button>
+                            <button pButton pRipple type="button" icon="pi pi-qrcode" (click)="showDialogQr(label)" class="p-button p-component p-button-text p-button-icon-only"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -45,6 +46,13 @@
         </div>
     </div>
 </div>
+
+<p-dialog header="QR" [modal]="true" [(visible)]="visibleDialogUrl" [style]="{ width: '25rem' }">
+    <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="urlQr" [width]="308" [errorCorrectionLevel]="'M'"></qrcode>
+    <div class="mt-4 text-center">
+        <!-- <button pButton label="Descargar" class="p-button-outlined mb-2" icon="pi pi-download" (click)="downloadQr()"></button> -->
+    </div>
+</p-dialog>
 
 <!-- <p-dialog header="Crear marca comercial" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
     <span class="p-text-secondary block mb-5">Crear marca comercial</span>

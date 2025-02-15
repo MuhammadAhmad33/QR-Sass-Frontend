@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BrandService } from '../services/brand.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UrlService } from '../../url/service/url.service';
 
 @Component({
   selector: 'app-create',
@@ -12,7 +13,7 @@ export class CreateComponent {
   labelForm: FormGroup;
   public brandId: string | null = null;
 
-  constructor(private fb: FormBuilder, private brandService: BrandService,private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private brandService: BrandService,private route: ActivatedRoute, private router: Router, private urlService: UrlService) {
     // get brandId from url
     this.brandId = this.route.snapshot.paramMap.get('brandId');
 
@@ -62,8 +63,6 @@ export class CreateComponent {
   }
 
   submitForm() {
-    console.log(this.labelForm.value);
-
     // check if form is valid
     if (this.labelForm.invalid) {
       return;
@@ -72,7 +71,11 @@ export class CreateComponent {
     this.brandService.createLabel(this.labelForm.value).subscribe(
       (response) => {
         console.log('Label created successfully', response);
-        this.router.navigate(['/editor/brand/' + this.brandId + '/labels']);
+        let url = 'https://qr-sass-frontend.vercel.app/label/' + response['_id'];
+        this.urlService.createUrl({fullUrl: url}).subscribe((data: any) => {
+          console.log('url created successfully', response);
+          this.router.navigate(['/editor/brand/' + this.brandId + '/labels']); 
+        });
       },
       (error) => {
         console.error('Error creating label', error);

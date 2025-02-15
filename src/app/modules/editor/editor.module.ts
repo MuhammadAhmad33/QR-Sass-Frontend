@@ -6,7 +6,8 @@ import { EditorComponent } from './editor.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { DialogModule } from 'primeng/dialog';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
     TableModule,
     ButtonModule,
     InputTextModule,
+    DialogModule,
+    QRCodeModule,
     EditorRoutingModule
   ]
 })

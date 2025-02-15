@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandService } from './services/brand.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-editor',
@@ -11,6 +12,9 @@ export class EditorComponent {
 
   public brandId: string | null = null;
   public labels: any = [];
+  visibleDialogUrl: boolean = false;
+  urlQr: string = '';
+  public qrCodeDownloadLink: SafeUrl = "";
 
   constructor(private route: ActivatedRoute, private router: Router, private brandService: BrandService) {
     this.brandId = this.route.snapshot.paramMap.get('brandId');
@@ -40,6 +44,15 @@ export class EditorComponent {
 
   createLabel() {
     this.router.navigate(['editor//brand/' + this.brandId + '/labels/create']);
+  }
+
+  showDialogQr(tinyUrl) {
+    this.visibleDialogUrl = true;
+    this.urlQr = 'https://qr-sass-frontend.vercel.app/label/' + tinyUrl['_id'];
+  }
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
   }
 
 }
